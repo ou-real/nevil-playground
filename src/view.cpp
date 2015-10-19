@@ -32,25 +32,24 @@ void nevil::view::keyPressEvent(QKeyEvent *event)
     _index = 0;
     std::cout << "Robot 1 selected" << std::endl << std::flush;
   }
+
+  // If there are more than one robot
+  /*  
   else if (event->key() == Qt::Key_2)
   {
     _index = 1;
     std::cout << "Robot 2 selected" << std::endl << std::flush;
   }
+  */
 
   // Diagnostics keys
   auto r = _arena->_robot_vector[_index];
   if (event->key() == Qt::Key_P)
   {
-    std::cout  << "Red Camera values:"<< std::endl << '[';
-    for (int i = 0; i < 60; ++i)
-    {
-      std::cout << r->camera.image[i].r() << ", ";
-      if (i == 59) std::cout << ']' << std::endl;
-    }
-  
+    std::cout  << "Camera values:"<< std::endl;
+    print_array(r->camera.image, 60);
     std::cout << "Neural Net inputs:" << std::endl;
-    std::cout << r->_get_sensor_inputs() << std::endl <<std::flush;
+    std::cout << r->_get_sensor_inputs() << std::endl << std::flush;
   }
   else if (event->key() == Qt::Key_R)
     _arena->reset();

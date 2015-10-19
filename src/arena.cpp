@@ -12,54 +12,26 @@ nevil::arena::arena(int world_size_x, int world_size_y, const Enki::Color &arena
   const double INITIAL_DEGREE = 0;
 
   //switch A
-  _add_object(new nevil::switch_object(world_size_x / 4.0
+  _add_object(new nevil::switch_object(world_size_x / 2.0
     , world_size_y
     , OBJECT_SIZE_X
     , OBJECT_SIZE_Y
     , OBJECT_HEIGHT));
 
     //light A
-  _add_object(new nevil::light(world_size_x / 4.0
+  _add_object(new nevil::light(world_size_x / 2.0
     , 0
     , OBJECT_SIZE_X
     , OBJECT_SIZE_Y
     , OBJECT_HEIGHT));
   
-  //switch B
-  _add_object(new nevil::switch_object(world_size_x * (3 / 4.0)
-    , world_size_y
-    , OBJECT_SIZE_X
-    , OBJECT_SIZE_Y
-    , OBJECT_HEIGHT));
-  
-  //light B
-  _add_object(new nevil::light(world_size_x * (3 / 4.0)
-    , 0
-    , OBJECT_SIZE_X
-    , OBJECT_SIZE_Y
-    , OBJECT_HEIGHT));
-  
-  //Wall in the middle of the field
-  _add_object(new nevil::wall(world_size_x / 2.0
-    , world_size_y / 2.0
-    , 0.01
-    , world_size_y
-    , OBJECT_HEIGHT));
-
   //--robots--
-  // Create a robot named A
-  _add_robot(new nevil::robot(world_size_x / 4.0
+  // Create a robot named MyRobot with 0 degree angle
+  _add_robot(new nevil::robot(world_size_x / 2.0
     , world_size_y / 2.0
-    , 0
-    , "A"
-    , Enki::Color(0.0, 0.0, 0.5)));
-
-  // Create a robot named B
-  _add_robot(new nevil::robot(world_size_x * (3 / 4.0)
-    , world_size_y / 2.0
-    , 0
-    , "B"
-    , Enki::Color(0.0, 0.5, 0.0)));
+    , INITIAL_DEGREE
+    , "TestRobot"
+    , Enki::Color(0.5, 0.0, 0.0)));
 }
 
 nevil::arena::~arena()
@@ -106,15 +78,9 @@ bool nevil::arena::update()
     if(r->is_at_switch())
     {
       std::cout << "Is at switch" << std::endl;
-      // Turn on the lights
-      _object_vector[1]->turn_on();
-      _object_vector[3]->turn_on();
-
-      // Only turn on the switch on your side
-      if (r->get_name() == "A")
-        _object_vector[0]->turn_on();
-      else
-        _object_vector[2]->turn_on();
+      // Turn on the light and switch
+      for (auto o : _object_vector)
+        o->turn_on();
     }
   }
 
