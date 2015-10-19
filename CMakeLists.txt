@@ -8,6 +8,7 @@ add_definitions(-std=c++0x)
 add_subdirectory(include/enki)
 link_directories (${enki_BINARY_DIR})
 include_directories(${enki_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/include)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
 
 file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/src/*)
 file(GLOB OBJECTS_SOURCES ${CMAKE_SOURCE_DIR}/src/objects/*)

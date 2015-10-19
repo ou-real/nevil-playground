@@ -33,7 +33,6 @@ result
 *.exe
 *.out
 *.app
-nevil
 
 # Make files
 Makefile
