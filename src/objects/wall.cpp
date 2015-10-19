@@ -1,0 +1,19 @@
+#include "nevil/objects/wall.hpp"
+
+nevil::wall::wall()
+{
+}
+
+nevil::wall::wall(int x, int y, double size_x, double size_y, double height, const Enki::Color &color)
+{
+  pos = Enki::Point(x, y);
+  _off_color = color;
+  _on_color = color;
+  setRectangular(size_x, size_y, height, -1);
+  setColor(color);
+}
+
+nevil::wall::~wall() {}
+
+void nevil::wall::turn_on() {}
+void nevil::wall::turn_off() {}
