@@ -1,9 +1,13 @@
 #include "nevil/view.hpp"
 
-nevil::view::view(nevil::arena *arena, QWidget *parent)
-  : Enki::ViewerWidget(arena->get_world(), parent)
-  , _arena(arena)
-  , _index(0)
+// nevil::view::view(QWidget *parent)
+//   : Enki::ViewerWidget(new Enki::World(), parent)
+// {}
+
+nevil::view::view(nevil::arena &arena, QWidget *parent)
+  : Enki::ViewerWidget(arena.get_world(), parent)
+  , _arena(std::move(arena))
+  , _robot_index(0)
 {
   pos.setX(-world->w * 1.1);
   pos.setY(-world->h * 0.5);
@@ -13,11 +17,9 @@ nevil::view::view(nevil::arena *arena, QWidget *parent)
   startTimer(0);
 }
 
-nevil::view::~view() {}
-
 void nevil::view::timerEvent(QTimerEvent *event)
 {
-  if(!_arena->update())
+  if(!_arena.update())
     QApplication::quit();
 
   updateGL();
@@ -29,31 +31,31 @@ void nevil::view::keyPressEvent(QKeyEvent *event)
   // Robot selection keys
   if (event->key() == Qt::Key_1)
   {
-    _index = 0;
-    std::cout << "Robot 1 selected" << std::endl << std::flush;
+    _robot_index = 0;
+    std::cout << "Robot " << _robot_index + 1 << " selected" << std::endl << std::flush;
   }
 
   // If there are more than one robot
   /*  
   else if (event->key() == Qt::Key_2)
   {
-    _index = 1;
+    _robot_index = 1;
     std::cout << "Robot 2 selected" << std::endl << std::flush;
   }
   */
 
   // Diagnostics keys
-  auto r = _arena->_robot_vector[_index];
+  auto r = _arena._robots[_robot_index];
   if (event->key() == Qt::Key_P)
   {
     std::cout  << "Camera values:"<< std::endl;
     print_array(r->camera.image, 60);
     std::cout << "Neural Net inputs:" << std::endl;
-    std::cout << r->_get_sensor_inputs() << std::endl << std::flush;
+    std::cout << r->_get_camera_inputs(_arena._objects) << std::endl << std::flush;
   }
-  else if (event->key() == Qt::Key_R)
-    _arena->reset();
 
+  else if (event->key() == Qt::Key_R)
+    _arena.reset();
 
   // Movement keys
   if (event->key() == Qt::Key_Up && event->modifiers() & Qt::ShiftModifier)

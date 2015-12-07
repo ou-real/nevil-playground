@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8.0)
 project(nevil)
 
 add_definitions(-g)
-add_definitions(-std=c++0x)
+add_definitions(-std=c++11)
 
 add_subdirectory(include/enki)
 link_directories (${enki_BINARY_DIR})

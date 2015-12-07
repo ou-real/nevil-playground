@@ -1,26 +1,13 @@
 #include "nevil/objects/light.hpp"
 
-nevil::light::light() {}
+const Enki::Color nevil::light::DEFAULT_OFF_COLOR = Enki::Color(0.5, 0.5, 0.0);
+const Enki::Color nevil::light::DEFAULT_ON_COLOR = Enki::Color(1.0, 1.0, 0.0);
 
-nevil::light::light(int x, int y, double size_x, double size_y, double height, const Enki::Color &off_color, const Enki::Color &on_color)
-{
-  pos = Enki::Point(x, y);
-  _off_color = off_color;
-  _on_color = on_color;
-  setRectangular(size_x, size_y, height, -1);
-  turn_off();
-}
+nevil::light::light()
+  : nevil::object()
+{}
 
-nevil::light::~light() {}
-
-void nevil::light::turn_on()
-{
-  setColor(_on_color);
-  _is_on = true;
-}
-
-void nevil::light::turn_off()
-{
-  setColor(_off_color);
-  _is_on = false;
-}
+nevil::light::light(int x, int y, double size_x, double size_y
+  , double height, const Enki::Color &off_color, const Enki::Color &on_color)
+  : nevil::object(x, y, size_x, size_y, height, off_color, on_color)
+{}

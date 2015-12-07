@@ -1,6 +1,10 @@
 #ifndef _NEVIL_ARENA_ARENA_HPP_
 #define _NEVIL_ARENA_ARENA_HPP_
 
+#include <memory>
+#include <vector>
+#include <unordered_map>
+
 #include "nevil/objects/object.hpp"
 #include "nevil/objects/switch.hpp"
 #include "nevil/objects/light.hpp"
@@ -9,25 +13,30 @@
 
 namespace nevil
 {
+  typedef std::vector<robot*> robot_list;
+  typedef std::unordered_map<std::string, nevil::object*> object_list;
+
   class arena
   {
   public:
-    arena();
-    arena(int size_x, int size_y, const Enki::Color &arena_color=Enki::Color(0.9, 0.9, 0.9));
-    virtual ~arena(); 
+    arena(const Enki::Color &color = Enki::Color(0.9, 0.9, 0.9));
+    arena(const nevil::arena &rhs);
+    arena(nevil::arena &&rhs) noexcept;
+    virtual ~arena();
 
-    void tick();
     bool update();
-    void reset();
+    bool reset();
 
-    Enki::World* get_world();
+    Enki::World* get_world() const;
+    nevil::arena &operator=(const nevil::arena &rhs);
+    nevil::arena &operator=(nevil::arena &&rhs) noexcept;
 
-    void _add_object(nevil::object *o);
+    void _add_object(const std::string &name, nevil::object *o);
     void _add_robot(nevil::robot *r);
 
-    Enki::World *_trial_world;
-    std::vector<robot*> _robot_vector;
-    std::vector<object*> _object_vector;
+    std::unique_ptr<Enki::World> _world;
+    robot_list _robots;
+    object_list _objects;
   };
 }
 #endif // _NEVIL_ARENA_ARENA_HPP_
