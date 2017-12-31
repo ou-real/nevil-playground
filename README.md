@@ -1,49 +1,49 @@
-#NEVIL: Nurturing and EVolution of Intelligence and Learning [![Build Status](https://travis-ci.org/ou-real/nevil-playground.svg?branch=master)](https://travis-ci.org/ou-real/nevil-playground)
+# NEVIL: Nurturing and EVolution of Intelligence and Learning [![Build Status](https://travis-ci.org/ou-real/nevil-playground.svg?branch=master)](https://travis-ci.org/ou-real/nevil-playground)
 
 
 
-##Usage
+## Usage
 You can clone this repository by running:
 ```bash
 git clone https://github.com/ou-real/nevil-playground.git
 ```
 
-###Compilation/Install
-####Windows
+### Compilation/Install
+#### Windows
 * Someone please write this
 
-####Unix
+#### Unix
 The binaries will be written to build folder.
 ```bash
 cmake CMakeLists.txt
 make
 ```
 
-###Execution
+### Execution
 You can run this application by executing the following command. The binaries are written to the build directory.
 ```bash
 ./nevil <args>
 ```
 
-####Making changes
+#### Making changes
 To add experiments you need to extend the following classes and provide your own implementation for **at least** the virtual methods. The files prefixed with test are place holders and can be deleted. You may follow the pattern used in test files. Here is a list of classes that you need to extend: 
 * `arena` 
 * `robot`
 
 
-##Dependencies
+## Dependencies
 * [GCC](https://gcc.gnu.org) or [Clang](http://clang.llvm.org)
 * [CMake](http://www.cmake.org)
 * [ENKI](http://home.gna.org/enki/): Already included in the project.
 * [QT4.8](http://qt-project.org/doc/qt-4.8/)
 
-###Install Dependencies
+### Install Dependencies
 
-####Windows
+#### Windows
 * Someone please write this
 
-####Unix
-#####OS X
+#### Unix
+##### OS X
 To install the required packages you need to have Xcode installed. For convenience, you also need to have either [HomeBrew](http://brew.sh) or [MacPorts](https://www.macports.org) installed.
 To install the required packages run the following commands:
 ```bash
@@ -59,7 +59,7 @@ If you are using MacPorts run the following commands:
 sudo port install cmake
 sudo port install qt4-mac
 ```
-#####Debian based Linux
+##### Debian based Linux
 To install the required packages run the following commands:
 ```bash
 sudo apt-get install build-essential
@@ -67,7 +67,7 @@ sudo apt-get install cmake
 sudo apt-get install git-core
 sudo apt-get install libqt4-dev
 ```
-##Structure
+## Structure
     nevil-playground
     ├── README.md                   - Description
     ├── .gitignore                  - Files ignore by Git
@@ -85,9 +85,9 @@ sudo apt-get install libqt4-dev
         ├── arena                   - Implementation files for simulation arena
         └── *.cpp                   - Other implementation files specific to the project
 
-##[Potential Bugs](https://github.com/ou-real/nevil-playground/issues)
+## [Potential Bugs](https://github.com/ou-real/nevil-playground/issues)
 
-##[To do](https://github.com/ou-real/nevil-playground/milestones)
+## [To do](https://github.com/ou-real/nevil-playground/milestones)
 
-##License
+## License
 [GPL-2.0 license](http://opensource.org/licenses/GPL-2.0)
